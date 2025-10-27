@@ -4,14 +4,14 @@ import multiprocessing
 import os
 
 # Server socket
-bind = "0.0.0.0:8000"
+bind = "0.0.0.0:" + str(os.environ.get("PORT", 8000))
 backlog = 2048
 
 # Worker processes
-workers = multiprocessing.cpu_count() * 2 + 1
+workers = 1  # Use single worker for free tier
 worker_class = "sync"
 worker_connections = 1000
-timeout = 30
+timeout = 120  # Increased timeout
 keepalive = 2
 
 # Restart workers after this many requests, to help prevent memory leaks
